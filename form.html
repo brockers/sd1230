@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>Process a form</title>
+	<script type="text/javascript">
+		function printStuff() {
+			var message = document.inputform.myTextbox.value;
+			alert(message);
+		}
+
+		function promptStuff() {
+			myName = prompt("What is your name?", "");
+			alert("Hello " + myName  + ".  Hope you have a nice day.");
+		}
+	</script>
+</head>
+<body>
+	<form name="inputform">
+		<input id="myTextbox" type="text" placeholder="Type something here..." />
+		<button onClick="javascript:printStuff();">Alert Message</button>
+		<br />
+		<a href="javascript:promptStuff();">And who are you?</a>
+	</form>
+</body>
+</html>

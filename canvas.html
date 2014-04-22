@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Practice with Canvas</title>
+	<script>
+
+		var canvas;
+
+		var resize = function () {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		};
+
+		window.addEventListener('resize', resize);
+		window.addEventListener('load', function() {
+		
+				canvas = document.querySelector('canvas');
+
+				var ctx = canvas.getContext('2d');
+				var pos, vel, paddle;
+				var intval;
+				
+				resize();
+				
+				pos = {x:10, y:10};
+				vel = {x:20, y:20};
+				paddle = {x: 20, y: 80, posx: canvas.width / 2, posy: canvas.height /2};
+
+				var loop = function ()  {
+					ctx.clearRect(0,0, canvas.width, canvas.width);
+					pos.x = pos.x + vel.x;
+					pos.y += vel.y;
+
+					if (pos.x < 5 || pos.x > canvas.width -5 ){ vel.x *= -1; }
+					if (pos.x > paddle.posx && pos.x < paddle.posx + paddle.x && pos.y > paddle.posy && pos.y < paddle.posy + paddle.y) { vel.x *= -1; }
+					if (pos.y < 5 || pos.y > canvas.height - 5){ vel.y *= -1; }
+
+					ctx.fillRect(paddle.posx, paddle.posy, paddle.x, paddle.y)
+					ctx.fillRect(pos.x - 5, pos.y -5 , 10, 10)
+				};
+
+				intval = setInterval(loop, 50);
+
+		});
+
+	</script>
+</head>
+<body>
+<canvas></canvas>
+</body>
+</html>

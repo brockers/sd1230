@@ -1,0 +1,54 @@
+<html>
+<head>
+	<title>Tasks</title>
+	<script src="jquery-1.6.4.js"></script>
+	<script language="javascript" type="application/javascript">
+
+		var DATABASE = "http://localhost:5984/bobby/";
+		var VIEW = DATABASE + "_design/tasks/_view/all?callback=?"
+
+		function getTasks() {
+			var tasks = [];
+			$.getJSON(VIEW, {}, function(jsonp) {
+				for(var i = 0; i < jsonp.rows.length; i++){
+					tasks.push(jsonp.rows[i].value);
+					displayTasks(tasks);
+				}
+			});
+		}
+		
+		function displayTasks(tasks) {
+			var html = "";
+			for(var i = 0; i < tasks.length; i++) {
+				html += "<tr><td>" + tasks[i] + "</td></tr>";
+			};
+			
+			$('#tasks').empty();            
+			$('#tasks').append(html);
+		}
+
+		function addTask() {
+			var desc = prompt("Enter a task description");
+			if (desc) {
+				var task = {"task": desc};
+
+				$.ajax({
+					type: "POST",
+					url: DATABASE,
+					contentType: "application/json",
+					crossDomain: true,
+					data: JSON.stringify(task),
+					success: function () {
+						getTasks();
+					}
+				});
+			}
+		}
+	</script>
+</head>
+<body onload="getTasks();">
+	<h1>Tasks</h1>    
+	<input type="button" id="add" value="Add" onclick="addTask();" />
+	<table id="tasks"></table>
+</body>
+</html>

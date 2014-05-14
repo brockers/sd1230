@@ -8,29 +8,27 @@
 		function getTasks() {
 			var tasks = [];
 			$.getJSON(DATABASE, {}, function(jsonp) {
-				$.each( jsonp.rows, function(i,nl) {
+				for(var i = 0; i < jsonp.rows.length; i++){
 					tasks.push(jsonp.rows[i].value);
 					displayTasks(tasks);
-				});
+				}
 			});
-
 		}
 		
 		function displayTasks(tasks) {
-				var html = "<table>";
-				$(tasks).each( function (index, task) {
-						html += "<tr><td>" + task + "</td></tr>";
-				});
-				html += "</table>";
-				
-				$('#tasks').empty();            
-				$('#tasks').append(html);
+			var html = "";
+			for(var i = 0; i < tasks.length; i++) {
+				html += "<tr><td>" + tasks[i] + "</td></tr>";
+			};
+			
+			$('#tasks').empty();            
+			$('#tasks').append(html);
 		}
 		
 </script>
 </head>
 <body onload="getTasks();">
 	<h1>Tasks</h1>    
-	<div id="tasks"></div>
+	<table id="tasks"></table>
 </body>
 </html>

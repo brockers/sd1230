@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My First Mobile Capable Page</title>
+	<title>My First Mobile Site</title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="jquery.mobile-1.0.1.css" />
-	<script src="jquery-1.6.4.js"></script> 
+	<script src="jquery-1.6.4.js"></script>
 	<script src="jquery.mobile-1.0.1.js"></script>
 </head>
 <body>
 	<div data-role="page" id="home" data-theme="b">
 		<div data-role="header">
-			<h1>Header</h1>
+			<h1>Page One</h1>
 		</div>
 		<div data-role="content">
 			<p>Lorem ipsum</p>
-			<p><a href="#second" data-role="button" data-transition="fade" data-icon="arrow-r" data-iconpos="right">Second page</a></p>
+			<p><a href="#pageTwo" data-role="button" data-icon="arrow-r" data-transition="slide" data-iconpos="right">Second page</a></p>
 		</div>
 		<div data-role="footer">
-			<h4>Footer</h4>
+			<h4>Page 1 Footer</h4>
 		</div>
 	</div>
-	<div data-role="page" id="second">
+	<div id="pageTwo" data-role="page">
 		<div data-role="header">
 			<h1>Page Two</h1>
 		</div>
 		<div data-role="content">
-			<p>Page Number 2A</p>
+			<p>Welcome to page two</p>
+			<p>Welcome to page two</p>
+			<p>Welcome to page two</p>
+			<p>Welcome to page two</p>
 		</div>
 		<div data-role="footer">
-			<h4>Footer Second Page</h4>
+			<h4>Page 2 Footer</h4>
 		</div>
 	</div>
 </body>

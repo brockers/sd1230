@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Tasks</title>
+	<script src="jquery-1.6.4.js"></script>
+	<script language="javascript" type="application/javascript">
+
+		var DATABASE = "http://localhost:5984/bobby/_design/tasks/_view/all?callback=?";
+		function getTasks() {
+			var tasks = [];
+			$.getJSON(DATABASE, {}, function(jsonp) {
+				$.each( jsonp.rows, function(i,nl) {
+					tasks.push(jsonp.rows[i].value);
+					displayTasks(tasks);
+				});
+			});
+
+		}
+		
+		function displayTasks(tasks) {
+				var html = "<table>";
+				$(tasks).each( function (index, task) {
+						html += "<tr><td>" + task + "</td></tr>";
+				});
+				html += "</table>";
+				
+				$('#tasks').empty();            
+				$('#tasks').append(html);
+		}
+		
+</script>
+</head>
+<body onload="getTasks();">
+	<h1>Tasks</h1>    
+	<div id="tasks"></div>
+</body>
+</html>

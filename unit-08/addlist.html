@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>Tasks</title>
+	<script src="jquery-1.6.4.js"></script>
+	<script language="javascript" type="application/javascript">
+
+		var DATABASE = "http://localhost:5984/bobby/";
+		var VIEW = DATABASE + "_design/tasks/_view/all?callback=?"
+
+		function getTasks() {
+			var tasks = [];
+			tasks = JSON.parse(localStorage.tasks);
+			displayTasks(tasks);
+		}
+		
+		function displayTasks(tasks) {
+			var html = "";
+			for(var i = 0; i < tasks.length; i++) {
+				html += "<tr><td>" + tasks[i] + "</td>"
+				html += '<td>( <a href="#" onclick="delTask(' + i + ');">X</a> )</td></tr>';
+			};
+			
+			$('#tasks').empty();            
+			$('#tasks').append(html);
+		}
+
+		function addTask() {
+			var tasks =  JSON.parse(localStorage.tasks);
+			var desc = prompt("Enter a task description");
+			if (desc) {
+				tasks.push(desc);
+				localStorage.tasks = JSON.stringify(tasks);
+			}
+			displayTasks(tasks)
+		}
+
+		function delTask(num) {
+			var tasks = JSON.parse(localStorage.tasks);
+			if(num >= 0) {
+				tasks.splice(num,1);
+				localStorage.tasks = JSON.stringify(tasks);
+			}
+			displayTasks(tasks);
+		}
+
+	</script>
+</head>
+<body onload="getTasks();">
+	<h1>Tasks</h1>    
+	<input type="button" id="add" value="Add" onclick="addTask();" />
+	<table id="tasks"></table>
+</body>
+</html>
